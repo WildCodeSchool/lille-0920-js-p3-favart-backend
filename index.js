@@ -1,7 +1,9 @@
 const { db, port } = require("./conf.js");
 const express = require("express");
 const app = express();
+const cors = require("cors");
 
+app.use(cors())
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -24,7 +26,7 @@ app.get("/client", (req, res) => {
 //Post a new client
 app.post("/client", (req, res) => {
   const {
-    name,
+    username,
     surname,
     email,
     phone,
@@ -38,10 +40,11 @@ app.post("/client", (req, res) => {
     wishes,
     website,
   } = req.body;
+  console.log(req.body)
   db.query(
-    "INSERT INTO Client(`name`, surname, email, phone, password, job, structure_name, structure_type, structure_field, job_field, territory, wishes, website) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    "INSERT INTO Client(username, surname, email, phone, password, job, structure_name, structure_type, structure_field, job_field, territory, wishes, website) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
     [
-      name,
+      username,
       surname,
       email,
       phone,
