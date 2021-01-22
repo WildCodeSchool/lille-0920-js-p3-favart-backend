@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `Client`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Client` (
   `idClient` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
+  `username` varchar(45) NOT NULL,
   `surname` varchar(45) NOT NULL,
   `email` varchar(85) NOT NULL,
   `phone` int NOT NULL,
@@ -38,18 +38,8 @@ CREATE TABLE `Client` (
   `wishes` varchar(300) DEFAULT NULL,
   `website` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`idClient`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Client`
---
-
-LOCK TABLES `Client` WRITE;
-/*!40000 ALTER TABLE `Client` DISABLE KEYS */;
-INSERT INTO `Client` VALUES (1,'Bob','Lhomme','bob.lhomme@gmail.com',602030405,'Jaimelesfleurs','Lanceur de nains','Les nains du nord','sarl','lancer de nains','entraineur','Hauts-de-France','LANCER DES NAINS !','lelancerdenainclavie.com'),(5,'Bob','Lhomme','bob.lhomme@gmail.com',602030405,'Jaimelesfleurs','Lanceur de nains','Les nains du nord','sarl','lancer de nains','entraineur','Hauts-de-France','LANCER DES NAINS !','lelancerdenainclavie.com');
-/*!40000 ALTER TABLE `Client` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -60,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-19 15:48:50
+-- Dump completed on 2021-01-22 14:56:44
