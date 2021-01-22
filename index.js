@@ -81,4 +81,24 @@ app.delete("/client/:id", (req, res) => {
   );
 });
 
+//Update a client
+app.put("/client/:id", (req, res) => {
+  // We get the ID from the url:
+  const idClient = req.params.id;
+  // We get the data from the req.body
+  const newClient = req.body;
+  // We send a UPDATE query to the DB
+  db.query(
+    "UPDATE Client SET ? WHERE idClient = ?",
+    [newClient, idClient],
+    (err, results) => {
+      if (err) {
+        res.status(500).send("Error updating an client");
+      } else {
+        res.status(200).send("Client updated successfully 🎉");
+      }
+    }
+  );
+});
+
 app.listen(port, () => {});
