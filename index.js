@@ -3,11 +3,10 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
-app.use(cors())
+app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  console.log("GET / was called!");
   res.send("Hi there!");
 });
 
@@ -15,7 +14,6 @@ app.get("/", (req, res) => {
 app.get("/client", (req, res) => {
   db.query("SELECT * from Client", (err, results) => {
     if (err) {
-      console.log(err);
       res.status(500).send("Error retrieving data");
     } else {
       res.status(200).json(results);
@@ -40,7 +38,6 @@ app.post("/client", (req, res) => {
     wishes,
     website,
   } = req.body;
-  console.log(req.body)
   db.query(
     "INSERT INTO Client(username, surname, email, phone, password, job, structure_name, structure_type, structure_field, job_field, territory, wishes, website) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
     [
@@ -60,8 +57,7 @@ app.post("/client", (req, res) => {
     ],
     (err, response) => {
       if (err) {
-        console.log(err);
-        res.status(500).send("Error saving an album");
+        res.status(500).send("Error saving a client");
       } else {
         res.status(200).send("Successfully saved !");
       }
@@ -77,7 +73,6 @@ app.delete("/client/:id", (req, res) => {
     [idClient],
     (err, results) => {
       if (err) {
-        console.log(err);
         res.status(500).send("😱 Error deleting an client");
       } else {
         res.status(200).send("🎉 Client deleted!");
@@ -86,6 +81,4 @@ app.delete("/client/:id", (req, res) => {
   );
 });
 
-app.listen(port, () => {
-  console.log(`API avalable on http://localhost:${port}`);
-});
+app.listen(port, () => {});
