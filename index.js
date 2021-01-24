@@ -11,8 +11,8 @@ app.get("/", (req, res) => {
 });
 
 //Get all projets
-app.get("/projet", (req, res) => {
-  db.query("SELECT * from projet", (err, results) => {
+app.get("/projets", (req, res) => {
+  db.query("SELECT * from projets", (err, results) => {
     if (err) {
       res.status(500).send("Error retrieving data");
     } else {
@@ -22,7 +22,7 @@ app.get("/projet", (req, res) => {
 });
 
 //Post a new projet
-app.post("/projets", (req, res) => {
+/*app.post("/projets", (req, res) => {
   const {
     titre,
     porteurs,
@@ -79,6 +79,8 @@ app.put("/projets/:id", (req, res) => {
       }
     }
   );
-});
+});*/
 
-app.listen(port, () => {});
+app.listen(port, () => {
+  console.log("server is running");
+});
