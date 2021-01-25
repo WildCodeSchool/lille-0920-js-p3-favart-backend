@@ -21,9 +21,10 @@ app.get("/projets", (req, res) => {
   });
 });
 
-//Post a new projet
-/*app.post("/projets", (req, res) => {
+/*//Post a new projet
+app.post("/projets", (req, res) => {
   const {
+    logo,
     titre,
     porteurs,
     enjeux,
@@ -33,8 +34,8 @@ app.get("/projets", (req, res) => {
     outils,
   } = req.body;
   db.query(
-    "INSERT INTO projets(titre,porteurs,enjeux,missions,partenaires,territoires,outils) VALUES (?, ?, ?, ?, ?, ?, ?,)",
-    [titre, porteurs, enjeux, missions, partenaires, territoires, outils],
+    "INSERT INTO projets(logo,titre,porteurs,enjeux,missions,partenaires,territoires,outils) VALUES (?, ?, ?, ?, ?, ?, ?, ?,)",
+    [logo, titre, porteurs, enjeux, missions, partenaires, territoires, outils],
     (err, response) => {
       if (err) {
         res.status(500).send("Error saving projet");
@@ -46,7 +47,7 @@ app.get("/projets", (req, res) => {
 });
 
 //Delete a projet
-app.delete("/projets/:id", (req, res) => {
+/*app.delete("/projets/:id", (req, res) => {
   const idProjet = req.params.id;
   db.query(
     "DELETE FROM projets WHERE idProjet = ?",
