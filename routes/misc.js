@@ -38,7 +38,7 @@ router.delete("/client/:id", (req, res) => {
 });
 
 //Update a client
-router.put("/client/:id", (req, res) => {
+router.patch("/client/:id", (req, res) => {
   // We get the ID from the url:
   const idClient = req.params.id;
   // We get the data from the req.body
@@ -49,6 +49,7 @@ router.put("/client/:id", (req, res) => {
     [newClient, idClient],
     (err, results) => {
       if (err) {
+        console.log(err);
         res.status(500).send("Error updating an client");
       } else {
         res.status(200).send("Client updated successfully 🎉");
@@ -61,7 +62,7 @@ router.put("/client/:id", (req, res) => {
 router.get("/client/:id", (req, res) => {
   const idClient = req.params.id;
   db.query(
-    "SELECT username, surname, email, phone, job, structure_name, structure_type, structure_field, job_field, territory, wishes, website FROM Client WHERE idClient = ?",
+    "SELECT idClient, username, surname, email, phone, job, structure_name, structure_type, structure_field, job_field, territory, wishes, website FROM Client WHERE idClient = ?",
     [idClient],
     (err, results) => {
       if (err) {
