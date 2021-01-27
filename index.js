@@ -21,7 +21,18 @@ app.get("/projets", (req, res) => {
   });
 });
 
-/*//Post a new projet
+app.get("/projets/:id", (req, res) => {
+  const idProjet = req.params.id;
+  db.query("SELECT * from projets WHERE id=?", [idProjet], (err, results) => {
+    if (err) {
+      res.status(500).send("Error retrieving data");
+    } else {
+      res.status(200).json(results);
+    }
+  });
+});
+
+//Post a new projet
 app.post("/projets", (req, res) => {
   const {
     logo,
@@ -34,7 +45,7 @@ app.post("/projets", (req, res) => {
     outils,
   } = req.body;
   db.query(
-    "INSERT INTO projets(logo,titre,porteurs,enjeux,missions,partenaires,territoires,outils) VALUES (?, ?, ?, ?, ?, ?, ?, ?,)",
+    "INSERT INTO projets(logo,titre,porteurs,enjeux,missions,partenaires,territoires,outils) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
     [logo, titre, porteurs, enjeux, missions, partenaires, territoires, outils],
     (err, response) => {
       if (err) {
@@ -47,30 +58,33 @@ app.post("/projets", (req, res) => {
 });
 
 //Delete a projet
-/*app.delete("/projets/:id", (req, res) => {
+app.delete("/projets/:id", (req, res) => {
   const idProjet = req.params.id;
-  db.query(
-    "DELETE FROM projets WHERE idProjet = ?",
-    [idProjet],
-    (err, results) => {
-      if (err) {
-        res.status(500).send("😱 Error deleting projet");
-      } else {
-        res.status(200).send("🎉 Projet deleted!");
-      }
+  db.query("DELETE FROM projets WHERE id = ?", [idProjet], (err, results) => {
+    if (err) {
+      res.status(500).send("😱 Error deleting projet");
+    } else {
+      res.status(200).send("🎉 Projet deleted!");
     }
-  );
+  });
+});
+app.delete("/projets/:ids", (req, res) => {
+  const idProjet = req.params.id;
+  db.query("DELETE FROM projets WHERE ids = ?", [idProjet], (err, results) => {
+    if (err) {
+      res.status(500).send("😱 Error deleting projet");
+    } else {
+      res.status(200).send("🎉 Projet deleted!");
+    }
+  });
 });
 
 //Update a projet
 app.put("/projets/:id", (req, res) => {
-  // We get the ID from the url:
   const idProjet = req.params.id;
-  // We get the data from the req.body
   const newProjet = req.body;
-  // We send a UPDATE query to the DB
   db.query(
-    "UPDATE projets SET ? WHERE idProjet = ?",
+    "UPDATE projets SET ? WHERE id = ?",
     [newProjet, idProjet],
     (err, results) => {
       if (err) {
@@ -80,7 +94,7 @@ app.put("/projets/:id", (req, res) => {
       }
     }
   );
-});*/
+});
 
 app.listen(port, () => {
   console.log("server is running");
