@@ -106,4 +106,22 @@ router.put("/client/:id", (req, res) => {
     );
 });
 
+//Get a client after identification
+router.get("/client/:id", (req, res) => {
+    // We get the ID from the url:
+    const idClient = req.params.id;
+
+    // We send a UPDATE query to the DB
+    db.query(
+        "SELECT * FROM Client WHERE idClient = ?", [idClient],
+        (err, results) => {
+            if (err) {
+                res.status(500).send("Error");
+            } else {
+                res.status(200).json(results);
+            }
+        }
+    );
+});
+
 module.exports = router;
