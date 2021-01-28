@@ -2,12 +2,6 @@ const express = require("express");
 const router = express.Router();
 const { db } = require("../conf");
 
-router.get("/", (req, res) => {
-    const msg =
-        "Welcome on Authentication-101! Feel free to read the README.md file";
-    res.status(200).send(msg);
-});
-
 //Display and modify clientbase
 
 //Get all clients
