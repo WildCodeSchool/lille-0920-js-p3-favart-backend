@@ -62,19 +62,9 @@ app.delete("/projets/:id", (req, res) => {
   const idProjet = req.params.id;
   db.query("DELETE FROM projets WHERE id = ?", [idProjet], (err, results) => {
     if (err) {
-      res.status(500).send("😱 Error deleting projet");
+      res.status(500).send("Error deleting projet");
     } else {
-      res.status(200).send("🎉 Projet deleted!");
-    }
-  });
-});
-app.delete("/projets/:ids", (req, res) => {
-  const idProjet = req.params.id;
-  db.query("DELETE FROM projets WHERE ids = ?", [idProjet], (err, results) => {
-    if (err) {
-      res.status(500).send("😱 Error deleting projet");
-    } else {
-      res.status(200).send("🎉 Projet deleted!");
+      res.status(200).send("Projet deleted!");
     }
   });
 });
@@ -91,6 +81,69 @@ app.put("/projets/:id", (req, res) => {
         res.status(500).send("Error updating projet");
       } else {
         res.status(200).send("Projet updated successfully 🎉");
+      }
+    }
+  );
+});
+
+app.get("/logos", (req, res) => {
+  db.query("SELECT * from logos", (err, results) => {
+    if (err) {
+      res.status(500).send("Error retrieving data");
+    } else {
+      res.status(200).json(results);
+    }
+  });
+});
+
+app.post("/logos", (req, res) => {
+  const { lien_url } = req.body;
+  db.query(
+    "INSERT INTO logos (lien_url) VALUES (?)",
+    [lien_url],
+    (err, response) => {
+      if (err) {
+        res.status(500).send("Error saving logo");
+      } else {
+        res.status(200).send("Successfully saved !");
+      }
+    }
+  );
+});
+
+app.delete("/logos/:id", (req, res) => {
+  const idLogos = req.params.id;
+  db.query("DELETE FROM logos WHERE id = ?", [idLogos], (err, results) => {
+    if (err) {
+      res.status(500).send("Error deleting logo");
+    } else {
+      res.status(200).send("Logo deleted!");
+    }
+  });
+});
+
+app.get("/logos/:id", (req, res) => {
+  const idLogo = req.params.id;
+  db.query("SELECT * from logos WHERE id=?", [idLogo], (err, results) => {
+    if (err) {
+      res.status(500).send("Error retrieving data");
+    } else {
+      res.status(200).json(results);
+    }
+  });
+});
+
+app.put("/logos/:id", (req, res) => {
+  const idLogos = req.params.id;
+  const newLogos = req.body;
+  db.query(
+    "UPDATE logos SET ? WHERE id=?",
+    [newLogos, idLogos],
+    (err, results) => {
+      if (err) {
+        res.status(500).send("Error updating logos");
+      } else {
+        res.status(200).send("logos updated successfully 🎉");
       }
     }
   );
