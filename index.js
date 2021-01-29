@@ -67,7 +67,6 @@ app.delete("/projets/:id", (req, res) => {
 });
 
 app.put("/projets/:id", (req, res) => {
-  
   const idProjet = req.params.id;
   const newProjet = req.body;
   db.query(
@@ -94,12 +93,11 @@ app.get("/logos", (req, res) => {
 });
 
 app.post("/logos", (req, res) => {
-  
   const { lien_url } = req.body;
   db.query(
     "INSERT INTO logos (lien_url) VALUES (?)",
     [lien_url],
-       (err, response) => {
+    (err, response) => {
       if (err) {
         res.status(500).send("Error saving logo");
       } else {
