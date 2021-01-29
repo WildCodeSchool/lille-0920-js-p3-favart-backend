@@ -10,7 +10,6 @@ app.get("/", (req, res) => {
   res.send("Hi there!");
 });
 
-//Get all projets
 app.get("/projets", (req, res) => {
   db.query("SELECT * from projets", (err, results) => {
     if (err) {
@@ -32,7 +31,6 @@ app.get("/projets/:id", (req, res) => {
   });
 });
 
-//Post a new projet
 app.post("/projets", (req, res) => {
   const {
     logo,
@@ -57,7 +55,6 @@ app.post("/projets", (req, res) => {
   );
 });
 
-//Delete a projet
 app.delete("/projets/:id", (req, res) => {
   const idProjet = req.params.id;
   db.query("DELETE FROM projets WHERE id = ?", [idProjet], (err, results) => {
@@ -69,8 +66,8 @@ app.delete("/projets/:id", (req, res) => {
   });
 });
 
-//Update a projet
 app.put("/projets/:id", (req, res) => {
+  
   const idProjet = req.params.id;
   const newProjet = req.body;
   db.query(
@@ -97,11 +94,12 @@ app.get("/logos", (req, res) => {
 });
 
 app.post("/logos", (req, res) => {
+  
   const { lien_url } = req.body;
   db.query(
     "INSERT INTO logos (lien_url) VALUES (?)",
     [lien_url],
-    (err, response) => {
+       (err, response) => {
       if (err) {
         res.status(500).send("Error saving logo");
       } else {
