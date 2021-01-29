@@ -10,9 +10,9 @@ app.get("/", (req, res) => {
   res.send("Hi there!");
 });
 
-//Get all clients
-app.get("/client", (req, res) => {
-  db.query("SELECT * from Client", (err, results) => {
+//Get all Ressources Favart
+app.get("/ressources", (req, res) => {
+  db.query("SELECT * from Ressources_Favart", (err, results) => {
     if (err) {
       res.status(500).send("Error retrieving data");
     } else {
@@ -21,43 +21,15 @@ app.get("/client", (req, res) => {
   });
 });
 
-//Post a new client
-app.post("/client", (req, res) => {
-  const {
-    username,
-    surname,
-    email,
-    phone,
-    password,
-    job,
-    structure_name,
-    structure_type,
-    structure_field,
-    job_field,
-    territory,
-    wishes,
-    website,
-  } = req.body;
+//Post a new Favart doc
+app.post("/ressources", (req, res) => {
+  const { link, title, description } = req.body;
   db.query(
-    "INSERT INTO Client(username, surname, email, phone, password, job, structure_name, structure_type, structure_field, job_field, territory, wishes, website) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-    [
-      username,
-      surname,
-      email,
-      phone,
-      password,
-      job,
-      structure_name,
-      structure_type,
-      structure_field,
-      job_field,
-      territory,
-      wishes,
-      website,
-    ],
+    "INSERT INTO Ressources_Favart(link, title, description) VALUES(?, ?, ?)",
+    [link, title, description],
     (err, response) => {
       if (err) {
-        res.status(500).send("Error saving a client");
+        res.status(500).send("Error saving a doc");
       } else {
         res.status(200).send("Successfully saved !");
       }
@@ -65,37 +37,60 @@ app.post("/client", (req, res) => {
   );
 });
 
-//Delete a client
-app.delete("/client/:id", (req, res) => {
+//Delete a Favart doc
+app.delete("/ressources/:id", (req, res) => {
   const idClient = req.params.id;
   db.query(
-    "DELETE FROM Client WHERE idClient = ?",
+    "DELETE FROM Ressources_Favart WHERE idRessources_Favart = ?",
     [idClient],
     (err, results) => {
       if (err) {
-        res.status(500).send("😱 Error deleting an client");
+        res.status(500).send("😱 Error deleting a doc");
       } else {
-        res.status(200).send("🎉 Client deleted!");
+        res.status(200).send("🎉 Doc deleted!");
       }
     }
   );
 });
 
-//Update a client
-app.put("/client/:id", (req, res) => {
-  // We get the ID from the url:
-  const idClient = req.params.id;
-  // We get the data from the req.body
-  const newClient = req.body;
-  // We send a UPDATE query to the DB
+//Get all Ressources Ext
+app.get("/ressourcesext", (req, res) => {
+  db.query("SELECT * from Ressources_Externes", (err, results) => {
+    if (err) {
+      res.status(500).send("Error retrieving data");
+    } else {
+      res.status(200).json(results);
+    }
+  });
+});
+
+//Post a new ext doc
+app.post("/ressourcesext", (req, res) => {
+  const { link, title, description } = req.body;
   db.query(
-    "UPDATE Client SET ? WHERE idClient = ?",
-    [newClient, idClient],
+    "INSERT INTO Ressources_Externes(link, title, description) VALUES(?, ?, ?)",
+    [link, title, description],
+    (err, response) => {
+      if (err) {
+        res.status(500).send("Error saving a doc");
+      } else {
+        res.status(200).send("Successfully saved !");
+      }
+    }
+  );
+});
+
+//Delete a ext doc
+app.delete("/ressourcesext/:id", (req, res) => {
+  const idClient = req.params.id;
+  db.query(
+    "DELETE FROM Ressources_Externes WHERE idRessources_Externes = ?",
+    [idClient],
     (err, results) => {
       if (err) {
-        res.status(500).send("Error updating an client");
+        res.status(500).send("😱 Error deleting a doc");
       } else {
-        res.status(200).send("Client updated successfully 🎉");
+        res.status(200).send("🎉 Doc deleted!");
       }
     }
   );
