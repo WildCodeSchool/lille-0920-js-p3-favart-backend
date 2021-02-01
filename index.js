@@ -146,5 +146,5 @@ app.put("/logos/:id", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log("server is running");
+  console.log(`API avalable on http://localhost:${port}`);
 });
