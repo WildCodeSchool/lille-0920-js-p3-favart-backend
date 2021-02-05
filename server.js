@@ -14,11 +14,10 @@ app.use("/", require("./routes/misc"));
 
 /* --------------------------------------------------------------------- 404 and server launch */
 app.use((req, res) => {
-  const msg = `Page not found: ${req.url}`;
-  console.warn(msg);
-  res.status(404).send(msg);
+    const msg = `Page not found: ${req.url}`;
+    res.status(404).send(msg);
 });
 
 app.listen(port, () => {
-  console.log(`API root available at: http://localhost:${port}/`);
+    console.log(`API root available at: http://localhost:${port}/`);
 });
