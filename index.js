@@ -10,7 +10,6 @@ app.get("/", (req, res) => {
   res.send("Hi there!");
 });
 
-
 app.get("/projets", (req, res) => {
   db.query("SELECT * from projets", (err, results) => {
     if (err) {
@@ -20,9 +19,6 @@ app.get("/projets", (req, res) => {
     }
   });
 });
-
-    
-
 
 app.get("/projets/:id", (req, res) => {
   const idProjet = req.params.id;
@@ -74,8 +70,6 @@ app.put("/projets/:id", (req, res) => {
     }
   );
 });
-
-
 
 app.delete("/projets/:id", (req, res) => {
   const idProjet = req.params.id;
@@ -141,12 +135,6 @@ app.get("/logos", (req, res) => {
   });
 });
 
-
-
-
-
-
-
 app.get("/logos/:id", (req, res) => {
   const idLogo = req.params.id;
   db.query("SELECT * from logos WHERE id=?", [idLogo], (err, results) => {
@@ -157,7 +145,6 @@ app.get("/logos/:id", (req, res) => {
     }
   });
 });
-
 
 app.post("/logos", (req, res) => {
   const { lien_url } = req.body;
@@ -190,7 +177,6 @@ app.put("/logos/:id", (req, res) => {
   );
 });
 
-
 app.delete("/logos/:id", (req, res) => {
   const idLogos = req.params.id;
   db.query("DELETE FROM logos WHERE id = ?", [idLogos], (err, results) => {
@@ -201,7 +187,6 @@ app.delete("/logos/:id", (req, res) => {
     }
   });
 });
-
 
 //Get all Ressources Ext
 app.get("/ressourcesext", (req, res) => {
@@ -223,14 +208,12 @@ app.post("/ressourcesext", (req, res) => {
     (err, response) => {
       if (err) {
         res.status(500).send("Error saving a doc");
-
       } else {
         res.status(200).send("Successfully saved !");
       }
     }
   );
 });
-
 
 //Delete a ext doc
 app.delete("/ressourcesext/:id", (req, res) => {
@@ -251,4 +234,3 @@ app.delete("/ressourcesext/:id", (req, res) => {
 app.listen(port, () => {
   console.log(`API avalable on http://localhost:${port}`);
 });
-
