@@ -10,8 +10,21 @@ app.get("/", (req, res) => {
   res.send("Hi there!");
 });
 
+
 app.get("/projets", (req, res) => {
   db.query("SELECT * from projets", (err, results) => {
+    if (err) {
+      res.status(500).send("Error retrieving data");
+    } else {
+      res.status(200).json(results);
+    }
+  });
+});
+
+    
+//Get all Ressources Favart
+app.get("/ressources", (req, res) => {
+  db.query("SELECT * from Ressources_Favart", (err, results) => {
     if (err) {
       res.status(500).send("Error retrieving data");
     } else {
@@ -55,6 +68,24 @@ app.post("/projets", (req, res) => {
   );
 });
 
+
+//Post a new Favart doc
+app.post("/ressources", (req, res) => {
+  const { link, title, description } = req.body;
+  db.query(
+    "INSERT INTO Ressources_Favart(link, title, description) VALUES(?, ?, ?)",
+    [link, title, description],
+    (err, response) => {
+      if (err) {
+        res.status(500).send("Error saving a doc");
+      } else {
+        res.status(200).send("Successfully saved !");
+      }
+    }
+  );
+});
+
+
 app.delete("/projets/:id", (req, res) => {
   const idProjet = req.params.id;
   db.query("DELETE FROM projets WHERE id = ?", [idProjet], (err, results) => {
@@ -82,8 +113,35 @@ app.put("/projets/:id", (req, res) => {
   );
 });
 
+//Delete a Favart doc
+app.delete("/ressources/:id", (req, res) => {
+  const idClient = req.params.id;
+  db.query(
+    "DELETE FROM Ressources_Favart WHERE idRessources_Favart = ?",
+    [idClient],
+    (err, results) => {
+      if (err) {
+        res.status(500).send("😱 Error deleting a doc");
+      } else {
+        res.status(200).send("🎉 Doc deleted!");
+      }
+    }
+  );
+});
+
 app.get("/logos", (req, res) => {
   db.query("SELECT * from logos", (err, results) => {
+    if (err) {
+      res.status(500).send("Error retrieving data");
+    } else {
+      res.status(200).json(results);
+    }
+  });
+});
+
+//Get all Ressources Ext
+app.get("/ressourcesext", (req, res) => {
+  db.query("SELECT * from Ressources_Externes", (err, results) => {
     if (err) {
       res.status(500).send("Error retrieving data");
     } else {
@@ -100,6 +158,23 @@ app.post("/logos", (req, res) => {
     (err, response) => {
       if (err) {
         res.status(500).send("Error saving logo");
+      } else {
+        res.status(200).send("Successfully saved !");
+      }
+    }
+  );
+});
+
+//Post a new ext doc
+app.post("/ressourcesext", (req, res) => {
+  const { link, title, description } = req.body;
+  db.query(
+    "INSERT INTO Ressources_Externes(link, title, description) VALUES(?, ?, ?)",
+    [link, title, description],
+    (err, response) => {
+      if (err) {
+        res.status(500).send("Error saving a doc");
+
       } else {
         res.status(200).send("Successfully saved !");
       }
@@ -145,6 +220,23 @@ app.put("/logos/:id", (req, res) => {
   );
 });
 
+//Delete a ext doc
+app.delete("/ressourcesext/:id", (req, res) => {
+  const idClient = req.params.id;
+  db.query(
+    "DELETE FROM Ressources_Externes WHERE idRessources_Externes = ?",
+    [idClient],
+    (err, results) => {
+      if (err) {
+        res.status(500).send("😱 Error deleting a doc");
+      } else {
+        res.status(200).send("🎉 Doc deleted!");
+      }
+    }
+  );
+});
+
 app.listen(port, () => {
   console.log(`API avalable on http://localhost:${port}`);
 });
+
