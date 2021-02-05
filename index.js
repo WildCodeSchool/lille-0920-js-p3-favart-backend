@@ -22,16 +22,7 @@ app.get("/projets", (req, res) => {
 });
 
     
-//Get all Ressources Favart
-app.get("/ressources", (req, res) => {
-  db.query("SELECT * from Ressources_Favart", (err, results) => {
-    if (err) {
-      res.status(500).send("Error retrieving data");
-    } else {
-      res.status(200).json(results);
-    }
-  });
-});
+
 
 app.get("/projets/:id", (req, res) => {
   const idProjet = req.params.id;
@@ -68,22 +59,22 @@ app.post("/projets", (req, res) => {
   );
 });
 
-
-//Post a new Favart doc
-app.post("/ressources", (req, res) => {
-  const { link, title, description } = req.body;
+app.put("/projets/:id", (req, res) => {
+  const idProjet = req.params.id;
+  const newProjet = req.body;
   db.query(
-    "INSERT INTO Ressources_Favart(link, title, description) VALUES(?, ?, ?)",
-    [link, title, description],
-    (err, response) => {
+    "UPDATE projets SET ? WHERE id = ?",
+    [newProjet, idProjet],
+    (err, results) => {
       if (err) {
-        res.status(500).send("Error saving a doc");
+        res.status(500).send("Error updating projet");
       } else {
-        res.status(200).send("Successfully saved !");
+        res.status(200).send("Projet updated successfully 🎉");
       }
     }
   );
 });
+
 
 
 app.delete("/projets/:id", (req, res) => {
@@ -97,17 +88,28 @@ app.delete("/projets/:id", (req, res) => {
   });
 });
 
-app.put("/projets/:id", (req, res) => {
-  const idProjet = req.params.id;
-  const newProjet = req.body;
+//Get all Ressources Favart
+app.get("/ressources", (req, res) => {
+  db.query("SELECT * from Ressources_Favart", (err, results) => {
+    if (err) {
+      res.status(500).send("Error retrieving data");
+    } else {
+      res.status(200).json(results);
+    }
+  });
+});
+
+//Post a new Favart doc
+app.post("/ressources", (req, res) => {
+  const { link, title, description } = req.body;
   db.query(
-    "UPDATE projets SET ? WHERE id = ?",
-    [newProjet, idProjet],
-    (err, results) => {
+    "INSERT INTO Ressources_Favart(link, title, description) VALUES(?, ?, ?)",
+    [link, title, description],
+    (err, response) => {
       if (err) {
-        res.status(500).send("Error updating projet");
+        res.status(500).send("Error saving a doc");
       } else {
-        res.status(200).send("Projet updated successfully 🎉");
+        res.status(200).send("Successfully saved !");
       }
     }
   );
@@ -139,9 +141,15 @@ app.get("/logos", (req, res) => {
   });
 });
 
-//Get all Ressources Ext
-app.get("/ressourcesext", (req, res) => {
-  db.query("SELECT * from Ressources_Externes", (err, results) => {
+
+
+
+
+
+
+app.get("/logos/:id", (req, res) => {
+  const idLogo = req.params.id;
+  db.query("SELECT * from logos WHERE id=?", [idLogo], (err, results) => {
     if (err) {
       res.status(500).send("Error retrieving data");
     } else {
@@ -149,6 +157,7 @@ app.get("/ressourcesext", (req, res) => {
     }
   });
 });
+
 
 app.post("/logos", (req, res) => {
   const { lien_url } = req.body;
@@ -163,6 +172,46 @@ app.post("/logos", (req, res) => {
       }
     }
   );
+});
+
+app.put("/logos/:id", (req, res) => {
+  const idLogos = req.params.id;
+  const newLogos = req.body;
+  db.query(
+    "UPDATE logos SET ? WHERE id=?",
+    [newLogos, idLogos],
+    (err, results) => {
+      if (err) {
+        res.status(500).send("Error updating logos");
+      } else {
+        res.status(200).send("logos updated successfully 🎉");
+      }
+    }
+  );
+});
+
+
+app.delete("/logos/:id", (req, res) => {
+  const idLogos = req.params.id;
+  db.query("DELETE FROM logos WHERE id = ?", [idLogos], (err, results) => {
+    if (err) {
+      res.status(500).send("Error deleting logo");
+    } else {
+      res.status(200).send("Logo deleted!");
+    }
+  });
+});
+
+
+//Get all Ressources Ext
+app.get("/ressourcesext", (req, res) => {
+  db.query("SELECT * from Ressources_Externes", (err, results) => {
+    if (err) {
+      res.status(500).send("Error retrieving data");
+    } else {
+      res.status(200).json(results);
+    }
+  });
 });
 
 //Post a new ext doc
@@ -182,43 +231,6 @@ app.post("/ressourcesext", (req, res) => {
   );
 });
 
-app.delete("/logos/:id", (req, res) => {
-  const idLogos = req.params.id;
-  db.query("DELETE FROM logos WHERE id = ?", [idLogos], (err, results) => {
-    if (err) {
-      res.status(500).send("Error deleting logo");
-    } else {
-      res.status(200).send("Logo deleted!");
-    }
-  });
-});
-
-app.get("/logos/:id", (req, res) => {
-  const idLogo = req.params.id;
-  db.query("SELECT * from logos WHERE id=?", [idLogo], (err, results) => {
-    if (err) {
-      res.status(500).send("Error retrieving data");
-    } else {
-      res.status(200).json(results);
-    }
-  });
-});
-
-app.put("/logos/:id", (req, res) => {
-  const idLogos = req.params.id;
-  const newLogos = req.body;
-  db.query(
-    "UPDATE logos SET ? WHERE id=?",
-    [newLogos, idLogos],
-    (err, results) => {
-      if (err) {
-        res.status(500).send("Error updating logos");
-      } else {
-        res.status(200).send("logos updated successfully 🎉");
-      }
-    }
-  );
-});
 
 //Delete a ext doc
 app.delete("/ressourcesext/:id", (req, res) => {
