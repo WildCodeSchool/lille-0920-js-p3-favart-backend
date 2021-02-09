@@ -146,7 +146,7 @@ app.get("/logos/:id", (req, res) => {
   });
 });
 
-app.post("/logos", (req, res) => {
+app.post("/logos", (req, res) => {Favart
   const { lien_url } = req.body;
   db.query(
     "INSERT INTO logos (lien_url) VALUES (?)",
@@ -229,6 +229,62 @@ app.delete("/ressourcesext/:id", (req, res) => {
       }
     }
   );
+});
+
+app.get("/auth_react_admin", (req, res) => {
+  db.query("SELECT * from auth_react_admin", (err, results) => {
+    if (err) {
+      res.status(500).send("Error retrieving data");
+    } else {
+      res.status(200).json(results);
+    }
+  });
+});
+
+app.post("/auth_react_admin", (req, res) => {
+  const {
+    username,password
+  
+  } = req.body;
+  db.query(
+    "INSERT INTO auth_react_admin(username,password) VALUES (?, ?)",
+    [username,password],
+    (err, response) => {
+      if (err) {
+        res.status(500).send("Error saving");
+      } else {
+        res.status(200).send("Successfully saved !");
+      }
+    }, 
+  );
+});
+
+
+app.post("/Client", (req, res) => {
+  const {
+    idClient, username, surname, email, phone, password,job, structure_name,structure_type, structure_field, job_field,territory,wishes,website
+  } = req.body;
+  db.query(
+    "INSERT INTO Client(idClient, username, surname, email, phone, password,job, structure_name,structure_type, structure_field, job_field,territory,wishes,website) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+    [idClient, username, surname, email, phone, password,job, structure_name,structure_type, structure_field, job_field,territory,wishes,website],
+    (err, response) => {
+      if (err) {
+        res.status(500).send("Error saving projet");
+      } else {
+        res.status(200).send("Successfully saved !");
+      }
+    }
+  );
+});
+
+app.get("/Client", (req, res) => {
+  db.query("SELECT * from Client", (err, results) => {
+    if (err) {
+      res.status(500).send("Error retrieving data");
+    } else {
+      res.status(200).json(results);
+    }
+  });
 });
 
 app.listen(port, () => {

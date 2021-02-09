@@ -10,6 +10,11 @@ app.use(cors());
 /* --------------------------------------------------------------------- Routes */
 
 app.use("/auth", require("./routes/auth"));
+
+app.use("/", require("./routes/projets"));
+app.use("/", require("./routes/logos"));
+
+
 app.use("/", require("./routes/misc"));
 
 /* --------------------------------------------------------------------- 404 and server launch */
