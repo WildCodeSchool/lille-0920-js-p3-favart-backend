@@ -13,6 +13,24 @@ router.get("/client", (req, res) => {
       res.status(200).json(results);
     }
   });
+
+});
+
+//Get a client
+router.get("/client/:id", (req, res) => {
+  const idClient = req.params.id;
+  db.query(
+    `SELECT * FROM Client WHERE idclient = ?`,
+    [idClient],
+    (err, results) => {
+      if (err) {
+        res.status(500).send("😱 Error retrieving an client");
+      } else {
+        res.status(200).json(results);
+      }
+    }
+  );
+
 });
 
 //Delete a client
