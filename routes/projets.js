@@ -1,11 +1,7 @@
 const express = require("express");
-const app = express();
 const { db} = require("../conf");
 const router = express.Router();
 
-
-app.use(cors());
-app.use(express.json());
 
 
 router.get("/projets", (req, res) => {

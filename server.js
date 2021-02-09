@@ -13,8 +13,8 @@ app.use("/auth", require("./routes/auth"));
 
 app.use("/", require("./routes/projets"));
 app.use("/", require("./routes/logos"));
-app.use("/", require("./routes/ressources"));
-app.use("/", require("./routes/ressourcesext"));
+app.use("/", require("./routes/docFavart"));
+app.use("/", require("./routes/docExt"));
 
 
 app.use("/", require("./routes/misc"));

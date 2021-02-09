@@ -1,12 +1,9 @@
 const express = require("express");
-const app = express();
-const cors = require("cors");
-const { db, port } = require("../conf");
+
+const { db} = require("../conf");
 const router = express.Router();
 
 
-app.use(cors());
-app.use(express.json());
 
 
 router.get("/logos", (req, res) => {
