@@ -16,7 +16,6 @@ app.use("/", require("./routes/logos"));
 app.use("/", require("./routes/docFavart"));
 app.use("/", require("./routes/docExt"));
 
-
 app.use("/", require("./routes/misc"));
 
 /* --------------------------------------------------------------------- 404 and server launch */
