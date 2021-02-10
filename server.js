@@ -11,10 +11,10 @@ app.use(cors());
 
 app.use("/auth", require("./routes/auth"));
 
-app.use("/", require("./routes/projets"));
-app.use("/", require("./routes/logos"));
-app.use("/", require("./routes/docFavart"));
-app.use("/", require("./routes/docExt"));
+app.use("/projets", require("./routes/projets"));
+app.use("/logos", require("./routes/logos"));
+app.use("/ressources", require("./routes/docFavart"));
+app.use("/ressourcesext", require("./routes/docExt"));
 
 app.use("/", require("./routes/misc"));
 

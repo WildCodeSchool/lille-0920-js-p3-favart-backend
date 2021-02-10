@@ -3,7 +3,7 @@ const express = require("express");
 const { db } = require("../conf");
 const router = express.Router();
 
-router.get("/logos", (req, res) => {
+router.get("/", (req, res) => {
   db.query("SELECT * from logos", (err, results) => {
     if (err) {
       res.status(500).send("Error retrieving data");
@@ -13,7 +13,7 @@ router.get("/logos", (req, res) => {
   });
 });
 
-router.get("/logos/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   const idLogo = req.params.id;
   db.query("SELECT * from logos WHERE id=?", [idLogo], (err, results) => {
     if (err) {
@@ -24,7 +24,7 @@ router.get("/logos/:id", (req, res) => {
   });
 });
 
-router.post("/logos", (req, res) => {
+router.post("/", (req, res) => {
   Favart;
   const { lien_url } = req.body;
   db.query(
@@ -40,7 +40,7 @@ router.post("/logos", (req, res) => {
   );
 });
 
-router.put("/logos/:id", (req, res) => {
+router.put("/:id", (req, res) => {
   const idLogos = req.params.id;
   const newLogos = req.body;
   db.query(
@@ -56,7 +56,7 @@ router.put("/logos/:id", (req, res) => {
   );
 });
 
-router.delete("/logos/:id", (req, res) => {
+router.delete("/:id", (req, res) => {
   const idLogos = req.params.id;
   db.query("DELETE FROM logos WHERE id = ?", [idLogos], (err, results) => {
     if (err) {

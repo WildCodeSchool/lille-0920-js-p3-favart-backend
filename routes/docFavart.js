@@ -3,7 +3,7 @@ const { db } = require("../conf");
 const router = express.Router();
 
 //Get all Ressources Favart
-router.get("/ressources", (req, res) => {
+router.get("/", (req, res) => {
   db.query("SELECT * from Ressources_Favart", (err, results) => {
     if (err) {
       res.status(500).send("Error retrieving data");
@@ -14,7 +14,7 @@ router.get("/ressources", (req, res) => {
 });
 
 //Post a new Favart doc
-router.post("/ressources", (req, res) => {
+router.post("/", (req, res) => {
   const { link, title, description } = req.body;
   db.query(
     "INSERT INTO Ressources_Favart(link, title, description) VALUES(?, ?, ?)",
@@ -30,7 +30,7 @@ router.post("/ressources", (req, res) => {
 });
 
 //Delete a Favart doc
-router.delete("/ressources/:id", (req, res) => {
+router.delete("/:id", (req, res) => {
   const idClient = req.params.id;
   db.query(
     "DELETE FROM Ressources_Favart WHERE idRessources_Favart = ?",
