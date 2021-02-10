@@ -82,29 +82,8 @@ LOCK TABLES `Client` WRITE;
 /*!40000 ALTER TABLE `Client` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `auth_react_admin`
---
 
-DROP TABLE IF EXISTS `auth_react_admin`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `auth_react_admin` (
-  `idauth_react_admin` int NOT NULL AUTO_INCREMENT,
-  `mail` varchar(48) NOT NULL,
-  `password` varchar(48) NOT NULL,
-  PRIMARY KEY (`idauth_react_admin`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `auth_react_admin`
---
-
-LOCK TABLES `auth_react_admin` WRITE;
-/*!40000 ALTER TABLE `auth_react_admin` DISABLE KEYS */;
-/*!40000 ALTER TABLE `auth_react_admin` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `logos`
