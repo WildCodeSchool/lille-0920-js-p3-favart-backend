@@ -13,7 +13,6 @@ router.get("/client", (req, res) => {
       res.status(200).json(results);
     }
   });
-
 });
 
 //Get a client
@@ -30,7 +29,6 @@ router.get("/client/:id", (req, res) => {
       }
     }
   );
-
 });
 
 //Delete a client
