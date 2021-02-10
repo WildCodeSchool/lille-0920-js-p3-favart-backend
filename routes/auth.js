@@ -8,13 +8,16 @@ require("../passport-strategies");
 
 router.post("/signup", (req, res) => {
   const formData = req.body;
+  let data = { idClient: null, token: "", infosClients: formData };
   formData.password = bcrypt.hashSync(formData.password, jwt_rounds);
   db.query(`INSERT INTO Client SET ?`, formData, (errSql, resSql) => {
     if (!errSql) {
       delete formData.password;
       formData.id = resSql.insertId;
       const token = jwt.sign(formData, jwt_secret);
-      res.status(201).json(token);
+      data.token = token;
+      data.idClient = formData.id;
+      res.status(201).json(data);
     } else {
       res.status(500).json(errSql);
     }
@@ -22,8 +25,10 @@ router.post("/signup", (req, res) => {
 });
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
+  let data = { idClient: req.user.idClient, token: "" };
   const token = jwt.sign(req.user, jwt_secret);
-  res.status(200).json({ token: token, user: req.user });
+  data.token = token;
+  res.status(201).json(data);
 });
 
 module.exports = router;

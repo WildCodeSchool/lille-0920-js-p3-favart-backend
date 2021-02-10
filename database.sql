@@ -27,7 +27,7 @@ CREATE TABLE `Client` (
   `username` varchar(45) NOT NULL,
   `surname` varchar(45) NOT NULL,
   `email` varchar(85) NOT NULL,
-  `phone` int NOT NULL,
+  `phone` varchar(40) NOT NULL,
   `password` varchar(65) NOT NULL,
   `job` varchar(100) NOT NULL,
   `structure_name` varchar(85) NOT NULL,
@@ -38,7 +38,39 @@ CREATE TABLE `Client` (
   `wishes` varchar(300) DEFAULT NULL,
   `website` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`idClient`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `Ressources_Externes`
+--
+
+DROP TABLE IF EXISTS `Ressources_Externes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Ressources_Externes` (
+  `idRessources_Externes` int NOT NULL AUTO_INCREMENT,
+  `link` varchar(300) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `description` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`idRessources_Externes`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `Ressources_Favart`
+--
+
+DROP TABLE IF EXISTS `Ressources_Favart`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Ressources_Favart` (
+  `idRessources_Favart` int NOT NULL AUTO_INCREMENT,
+  `link` varchar(500) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `description` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`idRessources_Favart`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,29 +82,8 @@ LOCK TABLES `Client` WRITE;
 /*!40000 ALTER TABLE `Client` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `auth_react_admin`
---
 
-DROP TABLE IF EXISTS `auth_react_admin`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `auth_react_admin` (
-  `idauth_react_admin` int NOT NULL AUTO_INCREMENT,
-  `mail` varchar(48) NOT NULL,
-  `password` varchar(48) NOT NULL,
-  PRIMARY KEY (`idauth_react_admin`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `auth_react_admin`
---
-
-LOCK TABLES `auth_react_admin` WRITE;
-/*!40000 ALTER TABLE `auth_react_admin` DISABLE KEYS */;
-/*!40000 ALTER TABLE `auth_react_admin` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `logos`
@@ -139,4 +150,6 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+
 -- Dump completed on 2021-02-05 14:51:14
+
